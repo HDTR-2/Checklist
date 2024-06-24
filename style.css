@@ -1,0 +1,164 @@
+/*style reset*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block
+}
+
+html {
+    height: 100%
+}
+
+body {
+    line-height: 1
+}
+
+ol, ul {
+    list-style: none
+}
+
+blockquote, q {
+    quotes: none
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+
+:root {
+    --blue: #3579F5;
+    --light-blue: #4777ED;
+    --dark-blue: #2364db;
+    --white: #FFFFFF;
+    --grey: #FFFFFF7F;
+    --main-font-family: 'Inter', sans-serif;
+    --main-line-height: 1.5;
+    --main-font-size: 12px;
+    --main-font-weight: 400;
+}
+
+/*Checklist*/
+.wrapper {
+    font-family: var(--main-font-family), serif;
+    line-height: var(--main-line-height);
+    font-size: var(--main-font-size);
+}
+
+.checklist {
+    padding: 150px;
+}
+
+.checklist__container {
+    max-width: 743px;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: var(--blue);
+    color: var(--white);
+
+}
+
+/*Checklist Анимация счетчика*/
+@property --progress {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+}
+
+[role="progressbar"] {
+    --size: 80px;
+    --bar-width: 4px;
+    font-size: 20px;
+    width: var(--size);
+    aspect-ratio: 1 / 1;
+    background: conic-gradient(
+            var(--white) 0deg,
+            var(--white) calc(var(--progress) * 51.42857deg),
+            var(--grey) 0deg
+    );
+    border-radius: 50vmax;
+    display: grid;
+    place-items: center;
+}
+
+[role="progressbar"]::after {
+    content: attr(aria-valuenow);
+    background: var(--blue);
+    width: calc(100% - var(--bar-width));
+    aspect-ratio: 1;
+    border-radius: inherit;
+    display: grid;
+    place-items: center;
+}
+
+@keyframes animateProgress {
+    0% {
+        --progress: 0;
+    }
+    100% {
+        --progress: var(--target-progress);
+    }
+}
+
+[role="progressbar"].animate {
+    animation: animateProgress 1.4s linear forwards;
+}
+
+
+.checklist__title {
+    text-align: center;
+    padding: 0 10px;
+    margin-bottom: 4px;
+    max-width: 76px;
+    border-radius: 40px;
+    background-color: var(--dark-blue);
+}
+
+.checklist__success-count {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.checklist__next-action {
+    font-weight: var(--main-font-weight);
+}
+
+.checklist__button {
+    margin-left: auto;
+    border-radius: 6px;
+    padding: 10px 32px;
+    font-weight: var(--main-font-weight);
+    font-size: 14px;
+    outline: transparent;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.35s ease-in-out;
+    background-color: var(--white);
+    color: var(--light-blue);
+}
+
+.checklist__button:hover {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
